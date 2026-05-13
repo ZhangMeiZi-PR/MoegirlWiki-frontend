@@ -1,5 +1,5 @@
 .background-image {
-  background-image: url('../../../../assets/Material/image/animegirls-1778478072253-7482.jpg');
+  background-image: url('../../../../assets/Material/image/background-image2.jpg');
   top: 0; 
   left: 0;
   width: 100%;
@@ -8,7 +8,7 @@
   background-position: center;
   background-repeat: no-repeat;
   position: fixed;
-  z-index: -1;  
+  z-index: -999;  
 }
 
   

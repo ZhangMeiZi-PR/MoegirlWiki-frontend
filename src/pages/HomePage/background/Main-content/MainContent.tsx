@@ -38,11 +38,11 @@ export function MainContent() {
         <div className='focus-content'>
           <div className='left-content'>
             <div className='page-header'>
-              <h1 className='header-text'>发现</h1>
+              <h1>discover</h1>
             </div>
             <div className='post-list'>
               <div className='post-top-header'>
-                <h2>Top</h2>
+                <h2>置顶</h2>
               </div>
               <div className='post-row'>
                 <div className='row-icon'>

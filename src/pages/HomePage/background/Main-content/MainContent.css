@@ -10,12 +10,23 @@
 }
 
 .pre-nav-bar {
-  background: rgba(136, 190, 235, 0.264);
+  background: rgba(241, 241, 241, 0.4);
   position: relative;
-  border-radius: 8px;
-  box-shadow: inset rgba(0, 0, 0, 0.4) 0px 1px 10px, rgba(255, 255, 255, 0.3) 0px 0px 0px 1px, rgba(255, 255, 255, 0.1) 0px 1px 15px;
+  border-radius: 4px;
+  box-shadow: inset rgba(255, 255, 255, 0.3) 0px 1px 0px, rgba(0, 0, 0, 0.3) 0px 1px 3px;
   padding: 8px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px) saturate(150%);
+}
+
+.pre-nav-bar::before {
+  content: "";
+  background-image: url(../../../../assets/Material/image/GuideBack.png);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  
 }
 
 .pre-nav-left {
@@ -47,6 +58,7 @@
   ;
   display: grid;
   grid-template-columns: 3fr 1fr;
+  align-items: start;
 }
 
 .left-content {
@@ -56,15 +68,18 @@
 .page-header {
   display: flex;
   align-content: center;
-
   border: 1px solid rgb(255, 255, 255, 0.2);
   border-radius: 4px;
-  background: rgba(103, 211, 228, 0.243);
+  background-color: rgba(18, 18, 19, 0.85);
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
 }
 
-.header-text {
+.page-header h1 {
   margin: 10px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 
@@ -82,14 +97,32 @@
 
 .post-top-header {
   margin: 5px;
-  background-color: transparent;
-  border: 1px solid white;
-  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(23, 162, 184, 0.8) 40%, rgba(102, 51, 153, 0.8) 100%);
+  border-radius: 3px;
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+
+.post-top-header::before {
+  content: "";
+  background-image: url('../../../../assets/Material/image/TopHeadTexture.png');
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-shadow: inset rgba(255, 255, 255, 0.1) 0px 0px 0px 1px, inset rgba(255, 255, 255, 0.3) 0px 1px 0px;
+  border-radius: 3px;
+  z-index: -1;
+  
 }
 
 .post-top-header h2 {
-  margin: 15px 12px;
+  margin: 15px 20px;
+  text-shadow: #000 0px -1px 0px;
 }
+
+
 
 
 .post-row {
@@ -159,21 +192,37 @@
 }
 
 .right-content {
-  position: relative;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   background: rgba(103, 211, 228, 0.243);
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(23px);
+  background-color: rgba(18, 18, 19, 0.75);
 }
 
 .right-content h1 {
   font-size: 15px;
   align-self: center;
-  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 4px;
-  margin: 5px;
-  padding: 14px 15px;
+  margin: 8px 5px;
+  padding: 7px 15px;
+  position: relative;
+  box-shadow: inset rgba(255, 255, 255, 0.1) 0px 0px 0px 1px, inset rgba(255, 255, 255, 0.3) 0px 1px 0px;
+  text-shadow: #000 0px -1px 0px;
+
+}
+
+.right-content h1::after {
+  content: "";
+  background-image: url(../../../../assets/Material/image/TopHeadTexture.png);
+  position: absolute;
+  background-repeat: repeat;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: black;
+  z-index: -99;
 }
 
 .recent-post-list {
