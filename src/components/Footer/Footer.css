@@ -1,0 +1,49 @@
+.mega-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  margin-top: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgba(18, 18, 19);
+  align-items: start;
+}
+
+.left-mega-footer {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.left-mega-footer h4 {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0;
+}
+
+.left-mega-footer h5 {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.left-mega-footer p {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.right-mega-footer {
+  color: rgba(255, 255, 255, 0.5);
+  padding-left: 70px;
+}
+
+.right-mega-footer header {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 4px;
+}
+
+.right-mega-footer ul {
+  font-size: 12px;
+  font-weight: 300;
+  margin-top: 10px;
+}

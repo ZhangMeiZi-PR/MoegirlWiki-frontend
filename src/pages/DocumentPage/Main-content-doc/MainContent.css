@@ -1,0 +1,156 @@
+.main-content {
+  margin: 0;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.focus-content-padding {
+  padding-top: 14px;
+}
+
+
+.focus-content.doc{
+  margin-top: 13px;
+  ;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.left-content {
+  margin-right: 8px;
+}
+
+.page-header {
+  display: flex;
+  align-content: center;
+  border: 1px solid rgb(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background-color: rgba(18, 18, 19, 0.85);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.page-header h1 {
+  margin: 10px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+
+.post-list {
+  display: grid;
+  position: relative;
+  margin-top: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(103, 211, 228, 0.243);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgba(18, 18, 19, 0.85);
+  backdrop-filter: blur(15px) saturate(130%);
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  padding:20px;
+}
+
+.post-top-header {
+  margin: 5px;
+  background: linear-gradient(90deg, rgba(23, 162, 184, 0.8) 40%, rgba(102, 51, 153, 0.8) 100%);
+  border-radius: 3px;
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+
+.post-top-header::before {
+  content: "";
+  background-image: url('../../../assets/Material/image/TopHeadTexture.png');
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-shadow: inset rgba(255, 255, 255, 0.1) 0px 0px 0px 1px, inset rgba(255, 255, 255, 0.3) 0px 1px 0px;
+  border-radius: 3px;
+  z-index: -1;
+
+}
+
+.post-top-header h2 {
+  margin: 15px 20px;
+  text-shadow: #000 0px -1px 0px;
+}
+
+
+.post-row.doc {
+  display: block;
+  height: 200px;
+  align-items: center;
+  justify-items: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px 12px;
+  border-radius: 5px;
+  background-color: #000;
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.src-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.src-header-background {
+  background-image: url('../../../assets/Material/image/2025迎新晚会主KT\(2\)改标题\(1\).png');
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+  filter: brightness(0.5) blur(3px) saturate(0.7);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.src-header:hover .src-header-background {
+  filter: brightness(0.8) blur(0) saturate(0.95);
+}
+
+.src-header:hover .src-link {
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+
+.src-link {
+  cursor: pointer;
+  z-index: 10;
+  text-decoration: none;
+  position: absolute;
+  align-self: center;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 50px;
+  white-space: nowrap;
+  text-shadow: 1px 2px 1px rgb(0, 0, 0);
+}
+
+
+
