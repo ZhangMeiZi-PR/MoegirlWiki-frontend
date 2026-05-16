@@ -1,7 +1,6 @@
 import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-src/Pre-nav-bar.tsx';
 import YingXin from '../../../assets/Material/image/2025迎新晚会主KT(2)改标题(1).png';
-import { Link } from 'react-router';
 
 interface MainConProps {
   srcName?: string;
