@@ -13,6 +13,9 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.11",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.15.0"
