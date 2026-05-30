@@ -12,7 +12,6 @@
 
 .focus-content.doc{
   margin-top: 13px;
-  ;
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
@@ -115,7 +114,6 @@
 }
 
 .src-header-background {
-  background-image: url('../../../assets/Material/image/2025迎新晚会主KT\(2\)改标题\(1\).png');
   position: absolute;
   left: 0px;
   right: 0px;

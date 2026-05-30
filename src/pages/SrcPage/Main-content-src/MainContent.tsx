@@ -1,23 +1,36 @@
 import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-src/Pre-nav-bar.tsx';
-import YingXin from '../../../assets/Material/image/2025迎新晚会主KT(2)改标题(1).png';
+import { useEffect, useState } from 'react';
 
 interface MainConProps {
-  srcName?: string;
+  id?: string
 }
 
-const srcDetails = [
-  {
-    script: "这是传媒新主管们的第一个制作任务，也是财大新生们第一次接触到传媒项目组的作品！新主管们要好好负责O!",
-    time: "一年一次 每年第一个学期开学初",
-  }
-]
+interface docFormType {
+  _id: string,
+  name: string,
+  date: string,
+  description: string,
+  baiduLink: string,
+  img: string
+}
 
-export function MainContent({ srcName }: MainConProps) {
+export function MainContent({ id }: MainConProps) {
+  
+  const [doc, setDoc] = useState<docFormType>()
+    useEffect(() => {
+      fetch(`/api/documents/${id}`)
+        .then(doc => doc.json())
+        .then(data => {
+          setDoc(data);
+          console.log(data)
+        })
+        .catch(err => console.error({ error: err.message }));
+    },[id])
   return (
     <main className='main-content'>
       <div className='focus-content-padding' >
-        <PreNavBar srcName={srcName}/>
+        <PreNavBar id={id}/>
 
         <div className='focus-content doc'>
           <div className='left-content'>
@@ -30,22 +43,21 @@ export function MainContent({ srcName }: MainConProps) {
               </div>
               <div className='doc-display'>
                 <div className='doc-content'>
-                  <h2>{srcName}</h2>
-                  <h4>时间：一年一次 每年第一个学期开学初</h4>
-                  <h4>这是传媒新主管们的第一个制作任务，也是财大新生们第一次接触到传媒项目组的作品！新主管们要好好负责O!</h4>
-                  <h4>链接：
+                  <h2>{doc?.name}</h2>
+                  <h4>时间：{doc?.date}</h4>
+                  <h4>{doc?.description}</h4>
+                  <h4>参考制作：
                     <a
-                    href='https://pan.baidu.com/s/1WxQsDemUjxoAPWiI1P1oag?pwd=mmbk'
+                    href=' https://pan.baidu.com/s/1YMMwUw8VDIvFvz8DMooBMg'
                       target='_blank'
                       rel='noopener noreferrer'
                       className='resource-link'
                     >
                       百度网盘链接
                     </a>
-                    <span className='pan-password'>（ 提取码：mmbk ）</span>
                   </h4>
                 </div>
-                <img src={YingXin} alt={YingXin}/>
+                <img src={`http://localhost:5000${doc?.img}`} alt='reference img'/>
               </div>
             </div>
           </div>

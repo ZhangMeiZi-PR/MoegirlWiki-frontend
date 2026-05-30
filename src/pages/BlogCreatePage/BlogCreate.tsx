@@ -1,16 +1,12 @@
-import './SrcPage.css';
+import './BlogCreate.css';
 import { Background } from "../../components/Background/Background.tsx";
 import { FocusHeader } from "../../components/Focus-Header/FocusHeader.tsx";
 import { NavBar } from "../../components/NavBar/NavBar.tsx";
-import { MainContent } from './Main-content-src/MainContent.tsx';
+import { MainContent } from '../BlogCreatePage/Main-content-create/MainContent.tsx';
 import { Footer } from '../../components/Footer/Footer.tsx';
-import { PreNavBar } from './Pre-nav-bar-src/Pre-nav-bar.tsx';
-import { useParams } from 'react-router';
+import { PreNavBar } from '../BlogCreatePage/Pre-nav-bar-create/Pre-nav-bar.tsx';
 
-
-export function SrcPage() {
-  
-  const { id } = useParams< {id: string} >();
+export function BlogCreate() {
   return (
     <>
       <title>萌媒百科</title>
@@ -19,9 +15,9 @@ export function SrcPage() {
         <FocusHeader />
         <div className='content-mega-layer'>
           <NavBar />
-          <MainContent id={id}/>
+          <MainContent />
           <Footer />
-          <PreNavBar customClass='bottom' id={id}/>
+          <PreNavBar customClass='bottom'/>
         </div>
       </div>
     </>

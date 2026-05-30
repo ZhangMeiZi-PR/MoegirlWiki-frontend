@@ -1,14 +1,14 @@
 import { Link } from 'react-router';
 import './NavBar.css';
 
-export function NavBar () {
+export function NavBar() {
   return (
     <div className='nav-bar-wrap'>
       <nav className='nav-bar'>
         <ul className='nav-left'>
           <li className='nav-left-background discover'>
             <Link className='nav-item1' to='/'>
-              发现 
+              发现
             </Link>
           </li>
           <li className='nav-left-background document'>
@@ -18,11 +18,17 @@ export function NavBar () {
           </li>
         </ul>
         <ul className='nav-right'>
-          <Link to='/admin' className='nav-logIn'>
-            登录           
+          <Link to='/document/create' className='nav-right-link nav-document-create'>
+            创建文档
+          </Link>
+          <Link to='/blog/create' className='nav-right-link nav-blog-create'>
+            发文
+          </Link>
+          <Link to='/admin' className='nav-right-link nav-logIn'>
+            登录
           </Link>
           <li className='nav-customize'>
-          <button className='customize-btn' aria-label='Open Customizer' />
+            <button className='customize-btn' aria-label='Open Customizer' />
           </li>
         </ul>
       </nav>

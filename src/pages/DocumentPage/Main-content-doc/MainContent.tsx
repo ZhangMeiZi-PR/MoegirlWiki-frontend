@@ -1,27 +1,28 @@
 import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-doc/Pre-nav-bar';
-import dog from '../../../assets/Material/image/dog.jpeg';
 import { Link } from 'react-router';
-const forumContents = [
-  {
-    id: 1,
-    icon: "💬",
-    title: "入门必看！！",
-    description: "这里是新人导航，入站必知，每个人都要好好看哦！！！！！！！！",
-    latestPost: { author: 'Mz', time: '2026-05-29 at 15:31', avatar: { dog } }
-  },
-  {
-    id: 2,
-    icon: "💬",
-    title: "资源必看！！",
-    description: "这里是新人导航，入站必知，每个人都要好好看哦！！！！！！！！",
-    latestPost: { author: 'Mz', time: '2026-05-29 at 18:13', avatar: { dog } }
-  }
-]
+import { useState, useEffect } from 'react';
 
+interface docFormType {
+  _id: string,
+  name: string,
+  img: string
+}
 
 
 export function MainContent() {
+  const [docs, setdocs] = useState<docFormType[]>([]);
+
+  useEffect(() => {
+    fetch('/api/documentsNameImg')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setdocs(data);
+      })
+      .catch(err => console.error({ error: err.message }));
+  }, []);
+
   return (
     <main className='main-content'>
       <div className='focus-content-padding' >
@@ -37,38 +38,20 @@ export function MainContent() {
                 <h2>资源汇总</h2>
               </div>
               <div className='doc-grid'>
-                <div className='post-row doc'>
-                  <div className='src-header'>
-                    <div className='src-header-background' />
-                    <Link to='/documents/迎新晚会' className='src-link'>
-                      迎新晚会
-                    </Link>
+                {docs.map((doc) => {
+                  return(
+                  <div className='post-row doc'>
+                    <div className='src-header'>
+                      <div 
+                        className='src-header-background'
+                        style={{backgroundImage:`url(http://localhost:5000${doc.img})`}}
+                       />
+                      <Link to={`/documents/${doc._id}`} className='src-link'>
+                        {doc.name}
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className='post-row doc'>
-                  <div className='src-header'>
-                    <div className='src-header-background' />
-                    <Link to='/documents/迎新晚会' className='src-link'>
-                      迎新晚会
-                    </Link>
-                  </div>
-                </div>
-                <div className='post-row doc'>
-                  <div className='src-header'>
-                    <div className='src-header-background' />
-                    <Link to='/documents/YingXinWanHui' className='src-link'>
-                      迎新晚会
-                    </Link>
-                  </div>
-                </div>
-                <div className='post-row doc'>
-                  <div className='src-header'>
-                    <div className='src-header-background' />
-                    <Link to='/documents/YingXinWanHui' className='src-link'>
-                      迎新晚会
-                    </Link>
-                  </div>
-                </div>
+                )})}
               </div>
             </div>
           </div>

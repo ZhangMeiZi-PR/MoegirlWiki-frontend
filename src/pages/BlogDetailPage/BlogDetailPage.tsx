@@ -1,0 +1,49 @@
+import './BlogDetailPage.css';
+import { Background } from "../../components/Background/Background.tsx";
+import { FocusHeader } from "../../components/Focus-Header/FocusHeader.tsx";
+import { NavBar } from "../../components/NavBar/NavBar.tsx";
+import { MainContent } from './Main-content-create/MainContent.tsx';
+import { Footer } from '../../components/Footer/Footer.tsx';
+import { PreNavBar } from './Pre-nav-bar-create/Pre-nav-bar.tsx';
+import { useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+
+interface BlogFormType  {
+  title?: string,
+  description?: string,
+  createdAt?: string,
+  details: {
+    author?: string,
+    avatar?: string
+  }
+}
+export function BlogDetailPage() {
+  const { id } = useParams<{ id: string }>();
+  const [blog, setblog] = useState<BlogFormType>();
+
+  useEffect(() => {
+    fetch(`/api/blogs/${id}`)
+      .then(res => res.json())
+      .then(blog => {
+        console.log(blog);
+        setblog(blog);
+      })
+      .catch(err => console.error({ error: err }));
+  }, [id])
+
+  return (
+    <>
+      <title>萌媒百科</title>
+      <Background />
+      <div className="content-layer">
+        <FocusHeader />
+        <div className='content-mega-layer'>
+          <NavBar />
+          <MainContent title={blog?.title} author={blog?.details.author} description={blog?.description} avatar={blog?.details.avatar} time={blog?.createdAt} />
+          <Footer />
+          <PreNavBar customClass='bottom' id={id} />
+        </div>
+      </div>
+    </>
+  )
+}
