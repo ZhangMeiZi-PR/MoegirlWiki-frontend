@@ -110,7 +110,7 @@ return (
                   />
                 </div>
                 <div className='create-author'>
-                  <label htmlFor='date'>示例图</label>
+                  <label>示例图</label>
                   <input
                     type='file'
                     accept='image/*'

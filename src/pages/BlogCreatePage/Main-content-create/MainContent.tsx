@@ -2,6 +2,8 @@ import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-create/Pre-nav-bar';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+
 
 interface BlogFormType {
   title: string,
@@ -23,39 +25,33 @@ export function MainContent() {
     avatar: '/dog.jpeg'
     }
   })
-
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     
     //send data
     setStatus('submitting');
 
-    fetch('/api/blogs/create', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(formData)
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error('Failed to create Post');
-        return res.json()
-  })
-    .then(() => {
+    try {
+      const response = await axiosPrivate.post('/api/blogs/create', formData);
+
+      console.log(response.data);
       setStatus('success');
       setTimeout(() => {
         navigate('/');
       }, 1500);
-  })
-    .catch((err) => {
-      console.error(err);
+    } catch (err) {
+      console.error(err instanceof Error ? err.message : 'Unknown error');
       setStatus('error');
+      //catch expired refreshToken?
       setTimeout(() => {
-        setStatus('idle')
+        setStatus('idle');
       }, 1500);
-    })
+    }
   }
   const isFormInValid = formData.title.trim() === '' || formData.details.author.trim() === '' || formData.description.trim() === '';
 

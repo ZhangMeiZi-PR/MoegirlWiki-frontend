@@ -48,7 +48,7 @@ export function MainContent({ id }: MainConProps) {
                   <h4>{doc?.description}</h4>
                   <h4>参考制作：
                     <a
-                    href=' https://pan.baidu.com/s/1YMMwUw8VDIvFvz8DMooBMg'
+                    href={doc?.baiduLink}
                       target='_blank'
                       rel='noopener noreferrer'
                       className='resource-link'

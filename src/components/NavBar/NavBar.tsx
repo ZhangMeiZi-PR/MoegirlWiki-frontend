@@ -24,7 +24,7 @@ export function NavBar() {
           <Link to='/blog/create' className='nav-right-link nav-blog-create'>
             发文
           </Link>
-          <Link to='/admin' className='nav-right-link nav-logIn'>
+          <Link to='/login' className='nav-right-link nav-logIn'>
             登录
           </Link>
           <li className='nav-customize'>

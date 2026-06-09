@@ -1,0 +1,238 @@
+.main-content {
+  margin: 0;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.focus-content-padding.login {
+  padding-top: 0px;
+}
+
+
+.focus-content.login {
+  margin-top: 0px;
+  ;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.left-content.login{
+  margin-right: 0px;
+}
+
+.page-header {
+  display: flex;
+  align-content: center;
+  border: 1px solid rgb(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background-color: rgba(18, 18, 19, 0.85);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.page-header h1 {
+  margin: 10px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+
+.post-list.login {
+  display: grid;
+  position: relative;
+  margin: 50px 400px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgba(18, 18, 19, 0.9);
+  backdrop-filter: blur(0px) saturate(130%);
+}
+
+.doc-grid.login {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 0px;
+  justify-content: center;
+
+}
+
+.login-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-left: 20px;
+}
+
+.login-header h2 {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  
+}
+
+.login-header h4 {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.login-register-link {
+  text-decoration: none;
+  color: rgba(179, 220, 242)
+}
+
+.blog-create.login {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  align-items: end;
+}
+
+.create-title.username label,
+.create-author.email label,
+.create-describtion.password label,
+.avatar-upload label {
+  margin-right: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+
+}
+
+.create-title.username input,
+.create-author.email input,
+.create-describtion.password input,
+.avatar-upload input {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(182, 182, 182);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 8px;
+  min-width: 40vh;
+}
+
+.avatar-upload {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.img-preview {
+  justify-self: center;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+.submit-button {
+  width: 80px;
+  height: 30px;
+  align-self: end;
+  border: none;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.submit-button.idle {
+  background-color: rgba(255, 255, 255, 0.3);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.submit-button.active {
+  background-color: rgba(2, 166, 248, 0.9);
+  color: rgba(255, 255, 255, 1);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.submit-button.active:hover {
+  box-shadow: 0px 0px 4px rgba(2, 166, 248, 0.9);
+}
+
+.submit-button.active:active {
+  opacity: 0.6;
+}
+
+.submit-button.submitting {
+  background-color: rgba(2, 166, 248, 1);
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.spinner-icon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.spinner-icon::before {
+  content: "";
+  background-image: url('../../../assets/Material/image/loading.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 5%;
+  left: 33%;
+  width: 25px;
+  height: 25px;
+  z-index: 100;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submit-button.success {
+  background-color: #38a169;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(56, 161, 105, 0.4);
+}
+
+.tick-icon::before {
+  content: '';
+  background-image: url('../../../assets/Material/image/tick.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  align-self: center;
+  top: 5%;
+  left: 33%;
+  width: 30px;
+  height: 30px;
+  z-index: 100;
+  transform: scale(1.05);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.submit-button.error {
+  background-color: rgba(255, 255, 255, 0.3);
+}

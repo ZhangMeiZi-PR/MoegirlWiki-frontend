@@ -14,7 +14,7 @@ export function MainContent() {
   const [docs, setdocs] = useState<docFormType[]>([]);
 
   useEffect(() => {
-    fetch('/api/documentsNameImg')
+    fetch('/api/documents/NameImg')
       .then(res => res.json())
       .then(data => {
         console.log(data);
