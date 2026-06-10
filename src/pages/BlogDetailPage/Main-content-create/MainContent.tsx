@@ -11,7 +11,7 @@ interface BlogFormType {
 }
 
 export function MainContent({ title, description, time, author, avatar }: BlogFormType) {
-
+  
 
   return (
     <main className='main-content'>

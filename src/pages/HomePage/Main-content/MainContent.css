@@ -191,14 +191,14 @@
 
 .right-content h1::after {
   content: "";
-  background-image: url(../../assets/Material/image/TopHeadTexture.png);
+  background-image: url(../../../assets/Material/image/TopHeadTexture.png);
   position: absolute;
   background-repeat: repeat;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   z-index: -99;
 }
 

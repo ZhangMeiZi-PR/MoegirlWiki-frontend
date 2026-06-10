@@ -2,6 +2,7 @@ import './MainContent.css'
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
+import useToggle from '../../../hooks/useToggle';
 
 interface accountFormType {
   email: string,
@@ -16,6 +17,7 @@ export function MainContent() {
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errMsg, setErrMsg] = useState('');
+  const [check, toggleCheck] = useToggle('persist', false);
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -43,16 +45,16 @@ export function MainContent() {
       credentials: 'include'
     })
       .then((res) => {
-        if(!res.ok) {
+        if (!res.ok) {
           if (res?.status === 400) {
-          setErrMsg('邮箱或密码不正确')
-        } else if (res?.status === 401) {
-          setErrMsg('未授权');
-        } else {
-          setErrMsg('呀，服务器出错了！')
+            setErrMsg('邮箱或密码不正确')
+          } else if (res?.status === 401) {
+            setErrMsg('未授权');
+          } else {
+            setErrMsg('呀，服务器出错了！')
+          }
+          throw new Error('HTTP status ' + res.status);
         }
-        throw new Error('HTTP status ' + res.status);
-      }
         return res.json()
       })
       .then((data) => {
@@ -74,7 +76,16 @@ export function MainContent() {
         }, 1500);
       })
   }
+  //check blogForm
   const isFormInValid = formData.email.trim() === '' || formData.password.trim() === '';
+  //set persist
+  // const togglePersist = () => {
+  //   setPersist(prev => !prev);
+  // };
+
+  // useEffect(() => {
+  //   localStorage.setItem("persist", JSON.stringify(persist));
+  // }, [persist])
 
   return (
     <main className='main-content'>
@@ -121,6 +132,20 @@ export function MainContent() {
                   <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
                     {errMsg}
                   </p>
+                  <label className='persist-check'>
+                    <input
+                      type='checkbox'
+                      id='persist'
+                      onChange={toggleCheck}
+                      checked={check}
+                    />
+                    <div className="checkmark">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20 6L9 17L4 12" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <span className="label">记住我</span>
+                  </label>
                   <button
                     type="submit"
                     className={`submit-button ${status === 'idle' && !isFormInValid ? 'active' : status}`}

@@ -1,0 +1,11 @@
+.content-layer {
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  color: white;
+  padding: 0px 20px ;
+}
+
+.content-mega-layer {
+  padding-top: 150px;
+}

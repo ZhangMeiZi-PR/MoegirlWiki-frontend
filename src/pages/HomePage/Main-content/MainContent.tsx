@@ -1,7 +1,7 @@
 import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar/Pre-nav-bar';
 import { useEffect, useState } from 'react';
-import { TimeFormat } from '../../utils/TimeFormat';
+import { TimeFormat } from '../../../utils/TimeFormat';
 import { Link } from 'react-router';
 
 interface BlogType {

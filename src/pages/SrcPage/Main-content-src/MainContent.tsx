@@ -1,6 +1,7 @@
 import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-src/Pre-nav-bar.tsx';
 import { useEffect, useState } from 'react';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate.tsx';
 
 interface MainConProps {
   id?: string
@@ -15,18 +16,22 @@ interface docFormType {
   img: string
 }
 
-export function MainContent({ id }: MainConProps) {
+export function MainContent ({ id }: MainConProps) {
+  const axiosPrivate = useAxiosPrivate();
+  const [doc, setDoc] = useState<docFormType>();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosPrivate(`/api/documents/${id}`);
+        console.log(response);
+        setDoc(response.data);
+      } catch (err) {
+        console.error(err instanceof Error ? err.message : 'Unkown error');
+      }
+    };
+    fetchData();
+  }, [id, axiosPrivate])
   
-  const [doc, setDoc] = useState<docFormType>()
-    useEffect(() => {
-      fetch(`/api/documents/${id}`)
-        .then(doc => doc.json())
-        .then(data => {
-          setDoc(data);
-          console.log(data)
-        })
-        .catch(err => console.error({ error: err.message }));
-    },[id])
   return (
     <main className='main-content'>
       <div className='focus-content-padding' >

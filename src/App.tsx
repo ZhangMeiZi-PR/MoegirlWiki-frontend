@@ -9,8 +9,11 @@ import { DocumentCreatePage } from './pages/DocumentCreatePage/DocumentCreatePag
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { RegisterPage } from './pages/RegisterPage/RegisterPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage/UnauthorizedPage';
+import { Layout } from './layout/layout';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import RequireAuth from './components/RequireAuth';
 import PersistLogin from './components/PersistLogin';
+
 
 const Roles = {
   'User': 2007,
@@ -25,23 +28,25 @@ function App() {
     <Routes>
       {/* public routes */}
       <Route element={<PersistLogin />}>
-        <Route index element={<HomePage />} />
-        <Route path='/documents' element={<DocumentPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/login/register' element={<RegisterPage />} />
-        <Route path='/blogs/:id' element={<BlogDetailPage />} />
-        <Route path='/unauthorized' element={<UnauthorizedPage />} />
+        <Route element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path='/documents' element={<DocumentPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/login/register' element={<RegisterPage />} />
+          <Route path='/blogs/:id' element={<BlogDetailPage />} />
+          <Route path='/unauthorized' element={<UnauthorizedPage />} />
 
-        {/* protected routes: All */}
+          {/* protected routes: All */}
+          <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Editor, Roles.User]} />} >
+            <Route path='/blog/create' element={<BlogCreate />} />
+            <Route path='/documents/:id' element={<SrcPage />} />
+            <Route path='/login/:userId' element={<ProfilePage />} />
+          </Route>
 
-        <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Editor, Roles.User]} />} >
-          <Route path='/blog/create' element={<BlogCreate />} />
-          <Route path='/documents/:id' element={<SrcPage />} />
-        </Route>
-
-        {/* protected routes: Editor & Admin */}
-        <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Editor]} />} >
-          <Route path='/document/create' element={<DocumentCreatePage />} />
+          {/* protected routes: Editor & Admin */}
+          <Route element={<RequireAuth allowedRoles={[Roles.Admin, Roles.Editor]} />} >
+            <Route path='/document/create' element={<DocumentCreatePage />} />
+          </Route>
         </Route>
       </Route>
     </Routes>

@@ -1,7 +1,10 @@
 import { Link } from 'react-router';
 import './NavBar.css';
+import useAuth from '../../hooks/useAuth';
 
 export function NavBar() {
+  const { auth } = useAuth();
+  const isLogin = Boolean(auth?.accessToken);
   return (
     <div className='nav-bar-wrap'>
       <nav className='nav-bar'>
@@ -24,9 +27,10 @@ export function NavBar() {
           <Link to='/blog/create' className='nav-right-link nav-blog-create'>
             发文
           </Link>
-          <Link to='/login' className='nav-right-link nav-logIn'>
-            登录
-          </Link>
+          {isLogin
+            ? <Link to={`/login/${auth?.user?.id}`} className='nav-right-link nav-logIn'> 我 </Link>
+            : <Link to='/login' className='nav-right-link nav-logIn'> 登录 </Link>
+          }
           <li className='nav-customize'>
             <button className='customize-btn' aria-label='Open Customizer' />
           </li>

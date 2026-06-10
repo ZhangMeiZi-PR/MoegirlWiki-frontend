@@ -1,7 +1,4 @@
 import './SrcPage.css';
-import { Background } from "../../components/Background/Background.tsx";
-import { FocusHeader } from "../../components/Focus-Header/FocusHeader.tsx";
-import { NavBar } from "../../components/NavBar/NavBar.tsx";
 import { MainContent } from './Main-content-src/MainContent.tsx';
 import { Footer } from '../../components/Footer/Footer.tsx';
 import { PreNavBar } from './Pre-nav-bar-src/Pre-nav-bar.tsx';
@@ -13,17 +10,9 @@ export function SrcPage() {
   const { id } = useParams< {id: string} >();
   return (
     <>
-      <title>萌媒百科</title>
-      <Background />
-      <div className="content-layer">
-        <FocusHeader />
-        <div className='content-mega-layer'>
-          <NavBar />
-          <MainContent id={id}/>
-          <Footer />
-          <PreNavBar customClass='bottom' id={id}/>
-        </div>
-      </div>
+      <MainContent id={id}/>
+      <Footer />
+      <PreNavBar customClass='bottom' id={id}/>
     </>
   )
 }
