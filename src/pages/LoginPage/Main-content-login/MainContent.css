@@ -83,33 +83,32 @@
   color: rgba(179, 220, 242)
 }
 
-.blog-create.login {
+.account-check.login {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
   box-sizing: border-box;
   padding: 20px 20px;
+  padding-left: 10vh;
   align-items: end;
 }
 
-.create-title.username label,
-.create-author.email label,
-.create-describtion.password label {
+.check-email label,
+.check-password label {
   margin-right: 20px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 15px;
 
 }
 
-.create-title.username input,
-.create-author.email input,
-.create-describtion.password input {
+.check-email input,
+.check-password input {
   background-color: rgba(0, 0, 0, 0.9);
   color: rgb(182, 182, 182);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   padding: 8px;
-  min-width: 40vh;
+  min-width: 30vh;
 }
 
 .errmsg {

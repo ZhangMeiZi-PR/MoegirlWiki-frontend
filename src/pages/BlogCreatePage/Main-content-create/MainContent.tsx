@@ -3,28 +3,26 @@ import { PreNavBar } from '../Pre-nav-bar-create/Pre-nav-bar';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import useAuth from '../../../hooks/useAuth';
+import { SimpleEditor } from '@/components/tiptap-templates/simple/simple-editor';
+import { Editor } from '@tiptap/core';
 
 
-interface BlogFormType {
-  title: string,
-  description: string,
-  details: {
-  author: string,
-  avatar: string
-  }
-}
-
+// interface BlogFormType {
+//   title: string,
+//   content: string,
+//   details: {
+//     author: string,
+//     avatar: string
+//   }
+// };
 
 
 export function MainContent() {
-  const [formData, setFormData] = useState<BlogFormType>({
-    title: '',
-    description: '',
-    details: {
-    author: '',
-    avatar: '/dog.jpeg'
-    }
-  })
+  const { auth } = useAuth();
+  const [title, setTitle] = useState("");
+  const [editor, setEditor] = useState<Editor | null>(null);
+  const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const navigate = useNavigate();
@@ -32,12 +30,30 @@ export function MainContent() {
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
-    
+
     //send data
     setStatus('submitting');
+    setSaving(true);
+    if (!title.trim() || !editor) {
+      alert("Please fill in title and content");
+      return;
+    }
+    const plainText = editor.getText();
+    const wordsArray = plainText.trim().split(/\s+/).filter(Boolean);
+    const description = wordsArray.slice(0, 20).join('');
 
+    console.log({ title, editor: editor.getHTML() });
     try {
-      const response = await axiosPrivate.post('/api/blogs/create', formData);
+
+      const response = await axiosPrivate.post('/api/blogs/create', {
+        title,
+        content: editor.getHTML(),
+        description,
+        details: {
+          author: auth.user?.username || '',
+          avatar: auth.user?.avatar || '',
+        },
+      });
 
       console.log(response.data);
       setStatus('success');
@@ -50,10 +66,10 @@ export function MainContent() {
       //catch expired refreshToken?
       setTimeout(() => {
         setStatus('idle');
+        setSaving(false);
       }, 1500);
     }
   }
-  const isFormInValid = formData.title.trim() === '' || formData.details.author.trim() === '' || formData.description.trim() === '';
 
   return (
     <main className='main-content'>
@@ -62,58 +78,23 @@ export function MainContent() {
 
         <div className='focus-content blog'>
           <div className='left-content'>
-            <div className='page-header'>
-              <h1>blog create</h1>
-            </div>
-            <div className='post-list'>
-              <div className='post-top-header'>
-                <h2>创建帖子</h2>
+            <form className='header-blog-create' onSubmit={handleSubmit}>
+              <div className='title-input'>
+                <input type="text" placeholder="起一个标题吧..." name="text" className="input" value={title} onChange={e => setTitle(e.target.value)} autoComplete='off' />
               </div>
-              <div className='doc-grid blog'>
-                <form className='blog-create' onSubmit={handleSubmit}>
-                  <div className='create-title'>
-                    <label htmlFor='title'>标题</label>
-                    <input 
-                      type='text' 
-                      value={formData.title} 
-                      onChange={(e) => setFormData({...formData, title: e.target.value})}
-                      placeholder='请输入标题'
-                      id='title'
-                      required
-                    />
-                  </div>
-                  <div className='create-author'>
-                    <label htmlFor='author'>作者</label>
-                    <input
-                      type='text'
-                      value={formData.details.author}
-                      onChange={(e) => setFormData({...formData, details: {...formData.details,author: e.target.value}})}
-                      placeholder='请输入作者'
-                      id='author'
-                      required
-                  />
-                  </div> 
-                  <div className='create-describtion'>
-                    <textarea
-                      rows={8}
-                      value={formData.description}
-                      onChange={(e) => setFormData({...formData, description: e.target.value})}
-                      placeholder='请输入正文'
-                      required
-                    />
-                  </div>
-                  <button 
-                  type="submit" 
-                  className={`submit-button ${status === 'idle' && !isFormInValid ? 'active' : status}`}
-                  disabled={isFormInValid || status === 'submitting' || status === 'success' }
-                  >
-                    {status === 'idle' && '发布'}
-                    {status === 'submitting' && (<span className='spinner-icon' />)}
-                    {status === 'success' && <span className='tick-icon' />}
-                    {status === 'error' && '发布失败'}
-                  </button>
-                </form>
-              </div>
+              <button
+                type="submit"
+                className={`submit-button ${status === 'idle' && !saving ? 'active' : status}`}
+                disabled={saving || status === 'submitting' || status === 'success'}
+              >
+                {status === 'idle' && '发布'}
+                {status === 'submitting' && (<span className='spinner-icon' />)}
+                {status === 'success' && <span className='tick-icon' />}
+                {status === 'error' && '发布失败'}
+              </button>
+            </form>
+            <div className='post-list blog'>
+              <SimpleEditor onEditorReady={setEditor} />
             </div>
           </div>
         </div>

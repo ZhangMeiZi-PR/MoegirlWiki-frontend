@@ -1,4 +1,4 @@
-import './Pre-nav-bar.css';
+import '../../../components/Pre-nav-bar/Pre-nav-bar.css';
 import { Link } from 'react-router';
 
 interface PreNavBarProps {

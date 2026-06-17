@@ -1,5 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router';
+import { useState } from 'react';
 import { HomePage } from './pages/HomePage/HomePage';
 import { DocumentPage } from './pages/DocumentPage/DocumentPage';
 import { SrcPage } from './pages/SrcPage/SrcPage';
@@ -13,7 +14,7 @@ import { Layout } from './layout/layout';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import RequireAuth from './components/RequireAuth';
 import PersistLogin from './components/PersistLogin';
-
+import LoadingBar from 'react-top-loading-bar';
 
 const Roles = {
   'User': 2007,
@@ -23,8 +24,10 @@ const Roles = {
 
 
 function App() {
-
+  const [progress, setProgress] = useState(0);
   return (
+  <>
+    <LoadingBar color='#bee7f7' height={4} progress={progress} onLoaderFinished={() => setProgress(0)}/>
     <Routes>
       {/* public routes */}
       <Route element={<PersistLogin />}>
@@ -33,7 +36,7 @@ function App() {
           <Route path='/documents' element={<DocumentPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/login/register' element={<RegisterPage />} />
-          <Route path='/blogs/:id' element={<BlogDetailPage />} />
+          <Route path='/blogs/:id' element={<BlogDetailPage setProgress={setProgress}/>} />
           <Route path='/unauthorized' element={<UnauthorizedPage />} />
 
           {/* protected routes: All */}
@@ -50,6 +53,7 @@ function App() {
         </Route>
       </Route>
     </Routes>
+  </>  
   )
 }
 

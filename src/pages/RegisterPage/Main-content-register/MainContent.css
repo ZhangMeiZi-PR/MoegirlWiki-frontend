@@ -5,12 +5,12 @@
   padding-right: 0;
 }
 
-.focus-content-padding.login {
+.focus-content-padding.register {
   padding-top: 0px;
 }
 
 
-.focus-content.login {
+.focus-content.register {
   margin-top: 0px;
   ;
   display: grid;
@@ -18,7 +18,7 @@
   align-items: start;
 }
 
-.left-content.login{
+.left-content.register{
   margin-right: 0px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 
-.post-list.login {
+.post-list.register {
   display: grid;
   position: relative;
   margin: 50px 400px;
@@ -51,7 +51,7 @@
   backdrop-filter: blur(0px) saturate(130%);
 }
 
-.doc-grid.login {
+.doc-grid.register {
   display: flex;
   flex-direction: column;
   padding: 17px 0px;
@@ -59,18 +59,18 @@
 
 }
 
-.login-header {
+.register-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-left: 20px;
 }
 
-.login-header h2 {
+.register-header h2 {
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
   
 }
 
-.login-header h4 {
+.register-header h4 {
   margin: 0;
   color: rgba(255, 255, 255, 0.4);
   font-weight: 300;
@@ -78,12 +78,12 @@
   margin-bottom: 15px;
 }
 
-.login-register-link {
+.register-register-link {
   text-decoration: none;
   color: rgba(179, 220, 242)
 }
 
-.blog-create.login {
+.account-create.register {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -92,9 +92,9 @@
   align-items: end;
 }
 
-.create-title.username label,
-.create-author.email label,
-.create-describtion.password label,
+.create-username label,
+.create-email label,
+.create-password label,
 .avatar-upload label {
   margin-right: 20px;
   color: rgba(255, 255, 255, 0.7);
@@ -102,16 +102,16 @@
 
 }
 
-.create-title.username input,
-.create-author.email input,
-.create-describtion.password input,
+.create-username input,
+.create-email input,
+.create-password input,
 .avatar-upload input {
   background-color: rgba(0, 0, 0, 0.9);
   color: rgb(182, 182, 182);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   padding: 8px;
-  min-width: 40vh;
+  width: 40vh;
 }
 
 .avatar-upload {

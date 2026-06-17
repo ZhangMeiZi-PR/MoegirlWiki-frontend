@@ -2,6 +2,7 @@ import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-doc/Pre-nav-bar';
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
+import Loading from '../../../components/Loading/Loading';
 
 interface docFormType {
   _id: string,
@@ -12,6 +13,7 @@ interface docFormType {
 
 export function MainContent() {
   const [docs, setdocs] = useState<docFormType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/documents/NameImg')
@@ -19,6 +21,7 @@ export function MainContent() {
       .then(data => {
         console.log(data);
         setdocs(data);
+        setIsLoading(false);
       })
       .catch(err => console.error({ error: err.message }));
   }, []);
@@ -38,20 +41,26 @@ export function MainContent() {
                 <h2>资源汇总</h2>
               </div>
               <div className='doc-grid'>
-                {docs.map((doc) => {
-                  return(
-                  <div className='post-row doc'>
-                    <div className='src-header'>
-                      <div 
-                        className='src-header-background'
-                        style={{backgroundImage:`url(http://localhost:5000${doc.img})`}}
-                       />
-                      <Link to={`/documents/${doc._id}`} className='src-link'>
-                        {doc.name}
-                      </Link>
-                    </div>
-                  </div>
-                )})}
+                {isLoading
+                  ? 
+                  <Loading />
+                  :
+                  docs.map((doc) => {
+                    return (
+                      <div className='post-row doc'>
+                        <div className='src-header'>
+                          <div
+                            className='src-header-background'
+                            style={{ backgroundImage: `url(http://localhost:5000${doc.img})` }}
+                          />
+                          <Link to={`/documents/${doc._id}`} className='src-link'>
+                            {doc.name}
+                          </Link>
+                        </div>
+                      </div>
+                    )
+                  })
+                }
               </div>
             </div>
           </div>

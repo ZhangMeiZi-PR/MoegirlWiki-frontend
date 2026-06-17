@@ -2,9 +2,10 @@ import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-src/Pre-nav-bar.tsx';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate.tsx';
+import Loading from '../../../components/Loading/Loading.tsx';
 
 interface MainConProps {
-  id?: string
+  id?: string,
 }
 
 interface docFormType {
@@ -19,12 +20,15 @@ interface docFormType {
 export function MainContent ({ id }: MainConProps) {
   const axiosPrivate = useAxiosPrivate();
   const [doc, setDoc] = useState<docFormType>();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosPrivate(`/api/documents/${id}`);
         console.log(response);
         setDoc(response.data);
+        setIsLoading(false);
       } catch (err) {
         console.error(err instanceof Error ? err.message : 'Unkown error');
       }
@@ -46,6 +50,10 @@ export function MainContent ({ id }: MainConProps) {
               <div className='post-top-header'>
                 <h2>资源汇总</h2>
               </div>
+              { isLoading 
+                ?
+                <Loading />
+                :
               <div className='doc-display'>
                 <div className='doc-content'>
                   <h2>{doc?.name}</h2>
@@ -64,6 +72,7 @@ export function MainContent ({ id }: MainConProps) {
                 </div>
                 <img src={`http://localhost:5000${doc?.img}`} alt='reference img'/>
               </div>
+              }
             </div>
           </div>
         </div>

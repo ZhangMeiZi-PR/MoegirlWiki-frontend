@@ -105,8 +105,8 @@ export function MainContent() {
                     </Link>
                   </h4>
                 </header>
-                <form className='blog-create login' onSubmit={handleSubmit}>
-                  <div className='create-author email'>
+                <form className='account-check login' onSubmit={handleSubmit}>
+                  <div className='check-email'>
                     <label htmlFor='email'>邮箱</label>
                     <input
                       type='text'
@@ -118,7 +118,7 @@ export function MainContent() {
                       required
                     />
                   </div>
-                  <div className='create-describtion password'>
+                  <div className='check-password'>
                     <label htmlFor='password'>密码</label>
                     <input
                       type='password'

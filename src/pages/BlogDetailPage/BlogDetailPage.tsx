@@ -7,18 +7,19 @@ import { useEffect, useState } from 'react';
 
 interface BlogFormType  {
   title?: string,
-  description?: string,
+  content?: string,
   createdAt?: string,
-  details: {
+  details?: {
     author?: string,
     avatar?: string
   }
 }
-export function BlogDetailPage() {
+export function BlogDetailPage({setProgress}: {setProgress: (value: number) => void}) {
   const { id } = useParams<{ id: string }>();
   const [blog, setblog] = useState<BlogFormType>();
 
   useEffect(() => {
+    setProgress(40)
     fetch(`/api/blogs/${id}`)
       .then(res => res.json())
       .then(blog => {
@@ -26,11 +27,12 @@ export function BlogDetailPage() {
         setblog(blog);
       })
       .catch(err => console.error({ error: err }));
+      setTimeout(() => setProgress(100), 300);
   }, [id])
 
   return (
     <>
-      <MainContent title={blog?.title} author={blog?.details.author} description={blog?.description} avatar={blog?.details.avatar} time={blog?.createdAt} />
+      <MainContent title={blog?.title} author={blog?.details?.author} avatar={blog?.details?.avatar} time={blog?.createdAt} content={blog?.content}/>
       <Footer />
       <PreNavBar customClass='bottom' id={id} />
     </>

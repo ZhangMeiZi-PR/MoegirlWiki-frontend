@@ -49,7 +49,7 @@ export function MainContent() {
         console.log(data);
         setStatus('success');
         setTimeout(() => {
-          navigate('/login');
+          navigate('/register');
         }, 1500);
       })
       .catch((err) => {
@@ -64,12 +64,12 @@ export function MainContent() {
 
   return (
     <main className='main-content'>
-      <div className='focus-content-padding login' >
-        <div className='focus-content login'>
-          <div className='left-content login'>
-            <div className='post-list login'>
-              <div className='doc-grid login'>
-                <header className='login-header'>
+      <div className='focus-content-padding register' >
+        <div className='focus-content register'>
+          <div className='left-content register'>
+            <div className='post-list register'>
+              <div className='doc-grid register'>
+                <header className='register-header'>
                   <h2>
                     创建账号
                   </h2>
@@ -77,8 +77,8 @@ export function MainContent() {
                     我们欢迎你的到来！
                   </h4>
                 </header>
-                <form className='blog-create login' onSubmit={handleSubmit}>
-                  <div className='create-title username'>
+                <form className='account-create register' onSubmit={handleSubmit}>
+                  <div className='create-username'>
                     <label htmlFor='username'>用户名/昵称</label>
                     <input
                       type='username'
@@ -89,7 +89,7 @@ export function MainContent() {
                       required
                     />
                   </div>
-                  <div className='create-author email'>
+                  <div className='create-email'>
                     <label htmlFor='email'>邮箱</label>
                     <input
                       type='email'
@@ -100,8 +100,8 @@ export function MainContent() {
                       required
                     />
                   </div>
-                  <div className='create-describtion password'>
-                    <label htmlFor='password'>密码</label>
+                  <div className='create-password'>
+                    <label htmlFor='password'>密码(不少于6位)</label>
                     <input
                       type='password'
                       value={account.password}

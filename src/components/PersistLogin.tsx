@@ -6,7 +6,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 const PersistLogin = () => {
   const { auth } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   const [persist] = useLocalStorage('persist', false);
 

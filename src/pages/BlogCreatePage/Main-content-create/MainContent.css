@@ -22,35 +22,36 @@
   margin-right: 8px;
 }
 
-.page-header {
+.header-blog-create {
   display: flex;
-  align-content: center;
-  border: 1px solid rgb(255, 255, 255, 0.2);
-  border-radius: 4px;
-  background-color: rgba(18, 18, 19, 0.85);
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+  justify-content: space-between;
 }
 
-.page-header h1 {
-  margin: 10px 20px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 30px;
-  font-weight: 500;
-  text-transform: uppercase;
+.title-input {
+  margin-top: 15px;
+  margin-left: 5px;
 }
 
 
-.post-list {
+.post-list.blog {
   display: grid;
   position: relative;
-  margin-top: 15px;
+  margin-top: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
-  background: rgba(103, 211, 228, 0.243);
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
-  background-color: rgba(18, 18, 19, 0.85);
-  backdrop-filter: blur(15px) saturate(130%);
+  box-shadow: inset 1px 0px 15px rgba(255, 255, 255, 0.308);
+  backdrop-filter: blur(0px) saturate(100%);
+  border-radius: 22px;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(49, 51, 54);
+  /* Add your background pattern here */
+  /* background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
+  background-size: 60px 60px;
+  background-position: -5px -5px */
 }
+
 
 .doc-grid.blog {
   display: flex;
@@ -59,35 +60,22 @@
   justify-content: center;
 }
 
-.blog-create {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  box-sizing: border-box;
-  padding-bottom: 45px;
+.input {
+  border-radius: 10px;
+  outline: 2px solid #000000;
+  border: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #03030350;
+  outline-offset: 3px;
+  padding: 10px 1rem;
+  transition: 0.25s;
+  backdrop-filter: blur(75px) saturate(100%);
+  font-weight: 700;
 }
 
-.create-title label,
-.create-author label {
-  margin-right: 5px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 15px;
-}
-
-.create-title input,
-.create-author input,
-.create-describtion textarea {
-  background-color: rgb(60, 60, 60, 0.1);
-  color: rgb(182, 182, 182);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
-  padding: 8px;
-  min-width: 500px;
-}
-
-.create-describtion textarea {
-  width: 100%;
-  box-sizing: border-box;
+.input:focus {
+  outline-offset: 5px;
+  background-color: #00000022
 }
 
 .submit-button {
