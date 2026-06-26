@@ -10,27 +10,28 @@ interface BlogFormType {
   content?: string,
   time?: string,
   author?: string,
-  avatar?: string
+  avatar?: string,
+  isLoading: boolean
 }
 
-export function MainContent({ title, content, time, author, avatar }: BlogFormType) {
+export function MainContent({ title, content, time, author, avatar, isLoading }: BlogFormType) {
   
-  console.log(content);
   return (
     <main className='main-content'>
       <div className='focus-content-padding' >
         <PreNavBar />
-
+        {isLoading ? 
+          null : (
         <div className='focus-content blog'>
           <div className='left-content'>
             <article className='post-list detail'>
-              <section className='doc-grid blog single'>
+              <section className='blog-grid'>
                 <header className='blog-title'>
                   <h1>{title}</h1>
                 </header>
                 <div className='blog-details'>
                   <div className='blog-avatar'>
-                    <img src={`http://localhost:5000${avatar}`} alt="avatar"/>
+                    <img src={avatar} alt="avatar"/>
                   </div>
                   <div className='blog-author-time'>
                     <h2>{author}</h2>
@@ -42,12 +43,14 @@ export function MainContent({ title, content, time, author, avatar }: BlogFormTy
                 </div>
               </section>
               <div className='comments-context'>
-                <span>Comments</span>
+                <span>评论</span>
                 <Comments />
               </div>
             </article>
           </div>
         </div>
+          )
+        }
       </div>
     </main>
   )

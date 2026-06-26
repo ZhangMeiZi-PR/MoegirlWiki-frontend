@@ -33,7 +33,7 @@
   backdrop-filter: blur(15px) saturate(130%);
 }
 
-.doc-grid.blog.single {
+.blog-grid {
   display: flex;
   flex-direction: column;
   padding: 20px;

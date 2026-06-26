@@ -1,9 +1,14 @@
 import './MainContent.css'
 import { PreNavBar } from '../Pre-nav-bar-create/Pre-nav-bar';
 import { useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
+import { useNavigate } from 'react-router';
 
 interface DocFormType {
   name: string,
+  author: string | undefined,
+  userId: string | undefined,
   description: string,
   date: string,
   img: File | null,
@@ -13,80 +18,69 @@ interface DocFormType {
 
 
 export function MainContent() {
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const { auth } = useAuth();
   const [formData, setFormData] = useState<DocFormType>({
     name: '',
+    author: auth.user?.username,
+    userId: auth.user?.id,
     description: '',
     date: '',
     img: null,
     baiduLink: ''
   });
-const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-const [imagePreview, setImagePreview] = useState<string | null>(null);
 
+  const handleSubmit = async (e: React.SubmitEvent) => {
+    e.preventDefault();
 
-const handleSubmit = (e: React.SubmitEvent) => {
-  e.preventDefault();
+    //send data
+    setStatus('submitting');
+    const dataEnvelope = new FormData();
+    dataEnvelope.append('name', formData.name);
+    dataEnvelope.append('date', formData.date);
+    dataEnvelope.append('description', formData.description);
+    dataEnvelope.append('baiduLink', formData.baiduLink);
+    dataEnvelope.append('author', formData.author || '');
+    dataEnvelope.append('userId', formData.userId || '');
+    if (formData.img) {dataEnvelope.append('img', formData.img )};
 
-  //send data
-  setStatus('submitting');
-  const dataEnvelope = new FormData();
-
-  dataEnvelope.append('name', formData.name);
-  dataEnvelope.append('date', formData.date);
-  dataEnvelope.append('description', formData.description);
-  dataEnvelope.append('baiduLink', formData.baiduLink);
-  if (formData.img) {dataEnvelope.append('img', formData.img);}
-
-  
-
-  fetch('/api/documents/create', {
-    method: 'POST',
-    body: dataEnvelope
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error('Failed to create Post');
-      return res.json()
-    })
-    .then(() => {
+    try {
+      const response = await axiosPrivate.post('/api/documents/create', dataEnvelope, {
+        headers: {
+          'Content-Type': 'mutipart/form-data'
+        }
+      });
+      console.log(response.data);
       setStatus('success');
       setTimeout(() => {
-        setFormData({
-          name: '',
-          date: '',
-          description: '',
-          baiduLink: '',
-          img: null
-        })
+        navigate(0);
         setImagePreview(null);
-
       }, 1500);
-    })
-    .catch((err) => {
-      console.error(err);
+    } catch (err) {
+      console.error(err instanceof Error ? err.message : 'Unknown error');
       setStatus('error');
+      //catch expired refreshToken?
       setTimeout(() => {
-        setStatus('idle')
+        setStatus('idle');
       }, 1500);
-    })
-}
-const isFormInValid = formData.name.trim() === '' || formData.date.trim() === '' || formData.description.trim() === '' || formData.img === null || formData.baiduLink.trim() === '';
+    }
+  }
+    const isFormInValid = formData.name.trim() === '' || formData.date.trim() === '' || formData.description.trim() === '' || formData.img === null || formData.baiduLink.trim() === '';
 
-return (
-  <main className='main-content'>
-    <div className='focus-content-padding' >
-      <PreNavBar />
-
-      <div className='focus-content blog'>
-        <div className='left-content'>
-          <div className='page-header'>
-            <h1>document create</h1>
-          </div>
+    return (
+      <main className='main-content'>
+        <div className='focus-content-padding' >
+          <PreNavBar />
           <div className='post-list'>
             <div className='post-top-header'>
               <h2>创建文档</h2>
             </div>
-            <div className='doc-grid blog'>
-              <form className='blog-create' onSubmit={handleSubmit}>
+            <div className='create-doc-grid'>
+              <form className='doc-create-list' onSubmit={handleSubmit}>
                 <div className='create-title'>
                   <label htmlFor='title'>文档名称</label>
                   <input
@@ -95,10 +89,11 @@ return (
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder='请输入文档名'
                     id='title'
+                    autoComplete='off'
                     required
                   />
                 </div>
-                <div className='create-author document-create'>
+                <div className='create-date'>
                   <label htmlFor='date'>日期</label>
                   <input
                     type='text'
@@ -106,43 +101,50 @@ return (
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                     placeholder='请输入工程日期'
                     id='date'
+                    autoComplete='off'
                     required
                   />
                 </div>
-                <div className='create-author'>
-                  <label>示例图</label>
-                  <input
-                    type='file'
-                    accept='image/*'
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        setFormData({...formData, img: file });
-                        setImagePreview(URL.createObjectURL(file));
-                      }
-                    }}
-                    id='img-file'
-                    required
-                  />
-                  {imagePreview && (<img src={imagePreview} alt="Preview" className='img-preview'/>)}
+                <div className='create-example'>
+                  <div className='create-example-header'>
+                    <h2>示例图</h2>
+                    <label htmlFor='img-file'>点击上传图片</label>
+                    <input
+                      type='file'
+                      accept='image/*'
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setFormData({ ...formData, img: file });
+                          setImagePreview(URL.createObjectURL(file));
+                        }
+                      }}
+                      id='img-file'
+                      required
+                      hidden
+                    />
+                  </div>
+                  {imagePreview && (<img src={imagePreview} alt="Preview" className='create-example-preview' />)}
                 </div>
-                <div className='create-author'>
+                <div className='create-link'>
                   <label htmlFor='date'>百度云链接</label>
                   <input
                     type='text'
                     value={formData.baiduLink}
-                    onChange={(e) => setFormData({ ...formData, baiduLink:  e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, baiduLink: e.target.value })}
                     placeholder='请输入链接'
                     id='date'
+                    autoComplete='off'
                     required
                   />
                 </div>
-                <div className='create-describtion'>
+                <div className='create-description'>
                   <textarea
                     rows={8}
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     placeholder='请输入描述'
+                    autoComplete='off'
                     required
                   />
                 </div>
@@ -160,8 +162,6 @@ return (
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </main>
-)
-}
+      </main>
+    )
+  }

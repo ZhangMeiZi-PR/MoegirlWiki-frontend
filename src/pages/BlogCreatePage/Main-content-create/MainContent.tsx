@@ -42,19 +42,17 @@ export function MainContent() {
     const wordsArray = plainText.trim().split(/\s+/).filter(Boolean);
     const description = wordsArray.slice(0, 20).join('');
 
-    console.log({ title, editor: editor.getHTML() });
     try {
-
       const response = await axiosPrivate.post('/api/blogs/create', {
         title,
         content: editor.getHTML(),
         description,
         details: {
-          author: auth.user?.username || '',
-          avatar: auth.user?.avatar || '',
+          author: auth.user?.username,
+          userId: auth.user?.id,
+          avatar: auth.user?.avatar
         },
       });
-
       console.log(response.data);
       setStatus('success');
       setTimeout(() => {

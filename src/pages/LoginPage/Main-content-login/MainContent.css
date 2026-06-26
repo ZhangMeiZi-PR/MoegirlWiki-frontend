@@ -12,10 +12,8 @@
 
 .focus-content.login {
   margin-top: 0px;
-  ;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: start;
+  display: flex;
+  justify-content: center;
 }
 
 .left-content.login {
@@ -43,7 +41,6 @@
 .post-list.login {
   display: grid;
   position: relative;
-  margin: 50px 400px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
@@ -51,7 +48,7 @@
   backdrop-filter: blur(0px) saturate(130%);
 }
 
-.doc-grid.login {
+.login-grid {
   display: flex;
   flex-direction: column;
   padding: 17px 0px;

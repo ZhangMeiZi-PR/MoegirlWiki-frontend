@@ -9,8 +9,8 @@ import {
 } from "@tiptap/pm/state"
 import { cellAround, CellSelection } from "@tiptap/pm/tables"
 import {
+  Editor,
   findParentNodeClosestToPos,
-  type Editor,
   type NodeWithPos,
 } from "@tiptap/react"
 
@@ -372,18 +372,50 @@ export const handleImageUpload = async (
       `File size exceeds maximum allowed (${MAX_FILE_SIZE / (1024 * 1024)}MB)`
     )
   }
+  // display image  
+  const formData = new FormData();
+  formData.append('image', file);
+  
+  try {
+    const response = await fetch('/api/blogs/upload', {
+      method: 'POST',
+      body: formData,
+      signal: abortSignal
+    });
 
-  // For demo/testing: Simulate upload progress. In production, replace the following code
-  // with your own upload implementation.
-  for (let progress = 0; progress <= 100; progress += 10) {
-    if (abortSignal?.aborted) {
-      throw new Error("Upload cancelled")
+    if (!response.ok) {
+      throw new Error(`Server returned error status code: ${response.status}`);
     }
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    onProgress?.({ progress })
+
+    const data = await response.json();
+    const imageUrl = data.url;
+    if (!imageUrl) {
+      throw new Error('No imageUrl')
+    }
+
+    return imageUrl;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      throw error;
+    } else {
+      console.error(error);
+      throw new Error('Image upload failed', { cause: error })
+    }
   }
 
-  return "/images/tiptap-ui-placeholder-image.jpg"
+
+  // // For demo/testing: Simulate upload progress. In production, replace the following code
+  // // with your own upload implementation.
+  // for (let progress = 0; progress <= 100; progress += 10) {
+  //   if (abortSignal?.aborted) {
+  //     throw new Error("Upload cancelled")
+  //   }
+  //   await new Promise((resolve) => setTimeout(resolve, 500))
+  //   onProgress?.({ progress })
+  // }
+
+  // return "/images/tiptap-ui-placeholder-image.jpg"
 }
 
 type ProtocolOptions = {

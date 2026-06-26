@@ -3,12 +3,14 @@
   grid-template-columns: 1fr 1fr;
   position: relative;
   margin-top: 15px;
+  margin-bottom: 15px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   padding: 20px;
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
   background-color: rgba(18, 18, 19);
   align-items: start;
+
 }
 
 .left-mega-footer {
@@ -24,6 +26,7 @@
 .left-mega-footer h5 {
   font-size: 12px;
   font-weight: 300;
+  margin-top: 10px;
 }
 
 .left-mega-footer p {
@@ -39,7 +42,6 @@
 .right-mega-footer header {
   font-size: 15px;
   color: rgba(255, 255, 255, 0.8);
-  margin-top: 4px;
 }
 
 .right-mega-footer ul {

@@ -116,6 +116,8 @@
 .nav-right {
   display: flex;
   list-style: none;
+  justify-items: center;
+  align-items: center;
   gap: 30px;
 }
 
@@ -127,6 +129,15 @@
   font-weight: 600;
   text-decoration: none;
   z-index: 1;
+}
+
+.nav-right-link.nav-logIn {
+  width: 40px;
+}
+
+.nav-right-link.nav-logIn img {
+  border-radius: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .nav-right-link:hover {

@@ -12,10 +12,9 @@
 
 .focus-content.register {
   margin-top: 0px;
-  ;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: start;
+  display: flex;
+  justify-content: center;
+
 }
 
 .left-content.register{
@@ -43,7 +42,6 @@
 .post-list.register {
   display: grid;
   position: relative;
-  margin: 50px 400px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
@@ -118,6 +116,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  width: 64%;
 }
 
 .img-preview {

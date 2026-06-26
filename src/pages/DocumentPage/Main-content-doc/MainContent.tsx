@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 import Loading from '../../../components/Loading/Loading';
 
 interface docFormType {
-  _id: string,
-  name: string,
-  img: string
+  id: string,
+  docName: string,
+  exampleImage: string,
 }
 
 
@@ -16,10 +16,9 @@ export function MainContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/documents/NameImg')
+    fetch('/api/documents')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setdocs(data);
         setIsLoading(false);
       })
@@ -51,10 +50,10 @@ export function MainContent() {
                         <div className='src-header'>
                           <div
                             className='src-header-background'
-                            style={{ backgroundImage: `url(http://localhost:5000${doc.img})` }}
+                            style={{ backgroundImage: `url(${doc.exampleImage})` }}
                           />
-                          <Link to={`/documents/${doc._id}`} className='src-link'>
-                            {doc.name}
+                          <Link to={`/documents/${doc.id}`} className='src-link'>
+                            {doc.docName}
                           </Link>
                         </div>
                       </div>

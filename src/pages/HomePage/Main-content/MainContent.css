@@ -78,9 +78,6 @@
   text-shadow: #000 0px -1px 0px;
 }
 
-
-
-
 .post-row {
   display: grid;
   grid-template-columns: 70px minmax(0, 3fr) minmax(0, 1fr);
@@ -90,18 +87,18 @@
   padding: 16px 12px;
 }
 
+.post-link {
+  text-decoration: none;
+  align-self: center;
+}
+
 .row-icon {
   align-self: center;
   justify-self: center;
 }
 
 .row-icon svg {
-  width: 24px;
-}
-
-.post-link {
-  text-decoration: none;
-  align-self: center;
+  width: 29px;
 }
 
 .row-info {
@@ -208,9 +205,7 @@
   align-items: start;
 }
 
-.recent-post-avatar {
-
-}
+.recent-post-avatar {}
 
 .recent-post-link {
   text-decoration: none;
@@ -219,14 +214,11 @@
 .recent-row-post img {
   width: 34px;
   height: 34px;
-  border-radius: 6px;  
+  border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.recent-post-details {
-
-
-}
+.recent-post-details {}
 
 .recent-post-details h3 {
   margin: 0 0;
@@ -249,4 +241,55 @@
   font-size: 11px;
   color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
+}
+
+/* The main wrapper (<ul>) */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 12px 20px;
+  background-color: #333333;
+  /* Dark grey background */
+  border-radius: 4px;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+/* Individual list items (<li>) */
+.page-item {
+  display: flex;
+}
+
+/* The clickable links inside the list items (<a>) */
+.page-link {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover effect for numbers */
+.page-link:hover {
+  background-color: #555555;
+}
+
+/*  The Active Page (matches the white box from your screenshot) */
+.active-page .page-link {
+  background-color: #cccccc;
+  /* Light grey */
+  color: #000000;
+  /* Black text */
+  font-weight: bold;
+}
+
+/* Styling for the PREV and NEXT buttons */
+.prev-item .page-link,
+.next-item .page-link {
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }

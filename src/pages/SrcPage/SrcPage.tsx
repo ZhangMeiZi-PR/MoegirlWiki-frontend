@@ -4,7 +4,6 @@ import { Footer } from '../../components/Footer/Footer.tsx';
 import { PreNavBar } from './Pre-nav-bar-src/Pre-nav-bar.tsx';
 import { useParams } from 'react-router';
 
-
 export function SrcPage() {
   
   const { id } = useParams< {id: string} >();

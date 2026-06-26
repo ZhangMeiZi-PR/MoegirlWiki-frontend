@@ -21,19 +21,21 @@ export function NavBar() {
           </li>
         </ul>
         <ul className='nav-right'>
+          {isLogin
+            ? <Link to={`/login/${auth?.user?.id}`} className='nav-right-link nav-logIn'>
+              <img src={auth.user?.avatar} />
+            </Link>
+            : <Link to='/login' className='nav-right-link nav-logIn'> 登录 </Link>
+          }
+          <Link to='/blog/create' className='nav-right-link nav-blog-create'>
+            发帖
+          </Link>
           <Link to='/document/create' className='nav-right-link nav-document-create'>
             创建文档
           </Link>
-          <Link to='/blog/create' className='nav-right-link nav-blog-create'>
-            发文
-          </Link>
-          {isLogin
-            ? <Link to={`/login/${auth?.user?.id}`} className='nav-right-link nav-logIn'> 我 </Link>
-            : <Link to='/login' className='nav-right-link nav-logIn'> 登录 </Link>
-          }
-          <li className='nav-customize'>
+          {/* <li className='nav-customize'>
             <button className='customize-btn' aria-label='Open Customizer' />
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>

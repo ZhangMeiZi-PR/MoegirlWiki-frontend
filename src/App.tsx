@@ -30,8 +30,8 @@ function App() {
     <LoadingBar color='#bee7f7' height={4} progress={progress} onLoaderFinished={() => setProgress(0)}/>
     <Routes>
       {/* public routes */}
-      <Route element={<PersistLogin />}>
-        <Route element={<Layout />}>
+      <Route element={<Layout />}>
+        <Route element={<PersistLogin />}>
           <Route index element={<HomePage />} />
           <Route path='/documents' element={<DocumentPage />} />
           <Route path='/login' element={<LoginPage />} />

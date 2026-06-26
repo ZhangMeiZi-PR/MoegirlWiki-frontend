@@ -62,6 +62,7 @@ export function MainContent() {
         const user = data.user;
         const roles = data.roles;
         setAuth({ user, accessToken, roles });
+        console.log(user);
         setStatus('success');
         setTimeout(() => {
           navigate(from, { replace: true });
@@ -93,7 +94,7 @@ export function MainContent() {
         <div className='focus-content login'>
           <div className='left-content login'>
             <div className='post-list login'>
-              <div className='doc-grid login'>
+              <div className='login-grid'>
                 <header className='login-header'>
                   <h2>
                     登录

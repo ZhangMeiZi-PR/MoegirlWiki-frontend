@@ -55,6 +55,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
+  align-items: center;
   padding:20px;
 }
 
@@ -89,8 +90,9 @@
 .post-row.doc {
   display: block;
   height: 200px;
+  width: 330px;
   align-items: center;
-  justify-items: left;
+  justify-self: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 16px 12px;
   border-radius: 5px;

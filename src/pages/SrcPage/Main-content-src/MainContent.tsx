@@ -9,12 +9,12 @@ interface MainConProps {
 }
 
 interface docFormType {
-  _id: string,
-  name: string,
-  date: string,
+  id: string,
+  docName: string,
+  eventDate: string,
   description: string,
-  baiduLink: string,
-  img: string
+  link: string,
+  exampleImage: string
 }
 
 export function MainContent ({ id }: MainConProps) {
@@ -26,7 +26,6 @@ export function MainContent ({ id }: MainConProps) {
     const fetchData = async () => {
       try {
         const response = await axiosPrivate(`/api/documents/${id}`);
-        console.log(response);
         setDoc(response.data);
         setIsLoading(false);
       } catch (err) {
@@ -55,13 +54,13 @@ export function MainContent ({ id }: MainConProps) {
                 <Loading />
                 :
               <div className='doc-display'>
-                <div className='doc-content'>
-                  <h2>{doc?.name}</h2>
-                  <h4>时间：{doc?.date}</h4>
+                <article className='doc-content'>
+                  <h2>{doc?.docName}</h2>
+                  <h4>时间：{doc?.eventDate}</h4>
                   <h4>{doc?.description}</h4>
                   <h4>参考制作：
                     <a
-                    href={doc?.baiduLink}
+                    href={doc?.link}
                       target='_blank'
                       rel='noopener noreferrer'
                       className='resource-link'
@@ -69,8 +68,8 @@ export function MainContent ({ id }: MainConProps) {
                       百度网盘链接
                     </a>
                   </h4>
-                </div>
-                <img src={`http://localhost:5000${doc?.img}`} alt='reference img'/>
+                </article>
+                <img src={doc?.exampleImage} alt='reference img'/>
               </div>
               }
             </div>

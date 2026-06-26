@@ -9,19 +9,6 @@
   padding-top: 14px;
 }
 
-
-.focus-content.blog {
-  margin-top: 13px;
-  ;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: start;
-}
-
-.left-content {
-  margin-right: 8px;
-}
-
 .page-header {
   display: flex;
   align-content: center;
@@ -52,14 +39,14 @@
   backdrop-filter: blur(15px) saturate(130%);
 }
 
-.doc-grid.blog {
+.create-doc-grid {
   display: flex;
   flex-direction: row;
   padding: 20px;
   justify-content: center;
 }
 
-.blog-create {
+.doc-create-list {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -67,28 +54,61 @@
   padding-bottom: 45px;
 }
 
-.create-author.document-create  {
+.create-date,
+.create-title,
+.create-link {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.create-example {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-example-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.create-example-preview {
+  max-height: 200px;
+  max-width: 300px;
+  align-self: center;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .create-title label,
-.create-author label {
+.create-date label,
+.create-link label,
+.create-example h2 {
   margin-right: 5px;
   color: rgba(255, 255, 255, 0.8);
   font-size: 15px;
 }
 
-.img-preview {
-  max-height: 150px;
-  max-width: 200px;
-  align-self: center;
-  margin-top: 10px;
+.create-example label {
+  cursor: pointer;
+  background-color: rgba(2, 166, 248, 0.9);
+  border: 1px solid rgba(2, 166, 248, 0.9);
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 13px;
+  font-weight: 600;
+
 }
 
+
+
 .create-title input,
-.create-author input,
-.create-describtion textarea {
+.create-date input,
+.create-link input,
+.create-description textarea {
   background-color: rgb(60, 60, 60, 0.1);
   color: rgb(182, 182, 182);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -97,7 +117,7 @@
   min-width: 500px;
 }
 
-.create-describtion textarea {
+.create-description textarea {
   width: 100%;
   box-sizing: border-box;
 }

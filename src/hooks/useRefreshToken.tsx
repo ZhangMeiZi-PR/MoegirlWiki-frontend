@@ -1,10 +1,10 @@
 import useAuth from './useAuth';
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const refresh = () => {
-    fetch('/api/refresh', {
+    return fetch('/api/refresh', {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -15,15 +15,15 @@ const useRefreshToken = () => {
     })
     .then(data => {
       setAuth(prev => {
-        console.log(JSON.stringify(prev));
-        console.log(data.accessToken);
-        return { 
+        console.log("Previous Auth State:", prev);
+        return {
           ...prev,
           user: data.user,
           roles: data.roles,
           accessToken: data.accessToken,
-        };
+        }
       });
+      console.log(auth);
       return data.accessToken;
     })
     .catch(err => {

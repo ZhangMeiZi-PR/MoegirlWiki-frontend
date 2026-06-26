@@ -16,7 +16,6 @@ const PersistLogin = () => {
     const verifyRefreshToken = async () => {
       try {
         await refresh();
-        console.log(auth);
       }
       catch (err) {
         console.error(err);
@@ -26,7 +25,7 @@ const PersistLogin = () => {
       }
     }
     
-    if (!auth?.accessToken) {
+    if (!auth?.accessToken || !auth.roles) {
       verifyRefreshToken();
     } 
     return () => {
@@ -44,7 +43,7 @@ const PersistLogin = () => {
       {!persist 
         ? <Outlet />
         : isLoading
-          ? <p>Loading...</p>
+          ? <p> </p>
           : <Outlet />
       }
     </>

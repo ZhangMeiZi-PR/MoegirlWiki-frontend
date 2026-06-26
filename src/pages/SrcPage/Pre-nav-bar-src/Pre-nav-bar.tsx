@@ -8,12 +8,7 @@ interface PreNavBarProps {
 }
 
 interface docFormType {
-  _id: string,
-  name: string,
-  date: string,
-  description: string,
-  baiduLink: string,
-  img: string
+  docName: string,
 }
 
 export function PreNavBar({ customClass, id }: PreNavBarProps) {
@@ -42,7 +37,7 @@ export function PreNavBar({ customClass, id }: PreNavBarProps) {
         </li>
         <li className='nav-left-content'>
           <Link className='link documents-link' to={`/documents/${id}`}>
-            {doc?.name}
+            {doc?.docName}
           </Link>
         </li>
       </ul>
