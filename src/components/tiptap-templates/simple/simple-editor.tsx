@@ -241,7 +241,10 @@ export function SimpleEditor({ onEditorReady }: SimpleEditorProps) {
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
         limit: 10,
-        upload: handleImageUpload,
+        upload: async (file: File) => {
+          // We call your original handler, but skip passing the progress function as a signal
+          return await handleImageUpload(file);
+        },
         onError: (error) => console.error("Upload failed:", error),
       }),
       TextStyle,
