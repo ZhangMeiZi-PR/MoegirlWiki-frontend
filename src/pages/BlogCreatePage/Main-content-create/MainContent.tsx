@@ -8,16 +8,6 @@ import { SimpleEditor } from '@/components/tiptap-templates/simple/simple-editor
 import { Editor } from '@tiptap/core';
 
 
-// interface BlogFormType {
-//   title: string,
-//   content: string,
-//   details: {
-//     author: string,
-//     avatar: string
-//   }
-// };
-
-
 export function MainContent() {
   const { auth } = useAuth();
   const [title, setTitle] = useState("");

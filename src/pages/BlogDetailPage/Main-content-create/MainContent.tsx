@@ -4,17 +4,26 @@ import { TimeFormat } from '../../../utils/TimeFormat';
 import { Comments } from '../Comments/Comments';
 import ReadOnlyEditor from '@/components/tiptap-templates/simple/read-only-editor';
 
-
+interface CommentModelType {
+  id: string;
+  body: string;
+  author: string;
+  avatar: string;
+  createdAt: string;
+}
 interface BlogFormType {
+  id: string | undefined,
+  userId: string | undefined,
   title?: string,
   content?: string,
   time?: string,
   author?: string,
   avatar?: string,
+  comments?: CommentModelType[],
   isLoading: boolean
 }
 
-export function MainContent({ title, content, time, author, avatar, isLoading }: BlogFormType) {
+export function MainContent({ id, userId, title, content, time, author, avatar, comments, isLoading }: BlogFormType) {
   
   return (
     <main className='main-content'>
@@ -43,8 +52,7 @@ export function MainContent({ title, content, time, author, avatar, isLoading }:
                 </div>
               </section>
               <div className='comments-context'>
-                <span>评论</span>
-                <Comments />
+                <Comments id={id} userId={userId} comments={comments}/>
               </div>
             </article>
           </div>

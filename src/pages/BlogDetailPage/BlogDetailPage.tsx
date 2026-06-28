@@ -5,13 +5,22 @@ import { PreNavBar } from './Pre-nav-bar-create/Pre-nav-bar.tsx';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 
-
+interface CommentModelType {
+  id: string;
+  body: string;
+  author: string;
+  avatar: string;
+  createdAt: string;
+}
 interface BlogFormType {
+  id?: string,
+  userId?: string,
   title?: string,
   content?: string,
   createdAt?: string,
   author?: string,
-  avatar?: string
+  avatar?: string,
+  comments?: CommentModelType[],
   }
 type ParamsType = {
   id?: string,
@@ -36,7 +45,7 @@ export function BlogDetailPage({setProgress}: {setProgress: (value: number) => v
 
   return (
     <>
-      <MainContent title={blog?.title} author={blog?.author} avatar={blog?.avatar} time={blog?.createdAt} content={blog?.content} isLoading={isLoading}/>
+      <MainContent id={blog?.id} userId={blog?.userId} title={blog?.title} author={blog?.author} avatar={blog?.avatar} time={blog?.createdAt} content={blog?.content} comments={blog?.comments} isLoading={isLoading}/>
       <Footer />
       <PreNavBar customClass='bottom' id={id} />
     </>
