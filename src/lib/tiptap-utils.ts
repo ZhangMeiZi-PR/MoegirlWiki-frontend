@@ -377,7 +377,7 @@ export const handleImageUpload = async (
   formData.append('image', file);
   
   try {
-    const response = await fetch('https://moegirlwiki-backend.onrender.com/api/blogs/upload', {
+    const response = await fetch('https://moegirlwiki-backend.onrender.com/api/blogs/update/upload', {
       method: 'POST',
       body: formData,
       signal: abortSignal
