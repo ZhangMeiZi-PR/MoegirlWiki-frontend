@@ -410,7 +410,7 @@ const ImageUploadPreview: React.FC<ImageUploadPreviewProps> = ({
 
 const DropZoneContent: React.FC<{ maxSize: number; limit: number }> = ({
   maxSize,
-  // limit,
+  limit,
 }) => (
   <>
     <div className="tiptap-image-upload-dropzone">
