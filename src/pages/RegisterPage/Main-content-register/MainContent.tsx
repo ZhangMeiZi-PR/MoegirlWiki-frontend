@@ -35,7 +35,7 @@ export function MainContent() {
     dataEnvelope.append('password', account.password);
     if (account.avatar) { dataEnvelope.append('avatar', account.avatar) };
 
-    fetch('/api/auth/register', {
+    fetch('https://moegirlwiki-backend.onrender.com/api/auth/register', {
       method: 'POST',
       body: dataEnvelope
     })

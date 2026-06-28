@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import useToggle from '../../../hooks/useToggle';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 
 interface accountFormType {
   email: string,
@@ -11,6 +12,7 @@ interface accountFormType {
 
 export function MainContent() {
   const { setAuth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
   const [formData, setFormData] = useState<accountFormType>({
     email: '',
     password: ''
@@ -38,26 +40,9 @@ export function MainContent() {
     //send data
     setStatus('submitting');
 
-    fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-      credentials: 'include'
-    })
-      .then((res) => {
-        if (!res.ok) {
-          if (res?.status === 400) {
-            setErrMsg('邮箱或密码不正确')
-          } else if (res?.status === 401) {
-            setErrMsg('未授权');
-          } else {
-            setErrMsg('呀，服务器出错了！')
-          }
-          throw new Error('HTTP status ' + res.status);
-        }
-        return res.json()
-      })
-      .then((data) => {
+    axiosPrivate.post('/api/auth/login', formData)
+      .then((response) => {
+        const data = response.data;
         const accessToken = data.accessToken;
         const user = data.user;
         const roles = data.roles;
@@ -69,6 +54,16 @@ export function MainContent() {
         }, 1500);
       })
       .catch((err) => {
+        if (err.response?.status === 400) {
+          if (err.response?.status === 400) {
+            setErrMsg('邮箱或密码不正确')
+          } else if (err.response?.status === 401) {
+            setErrMsg('未授权');
+          } else {
+            setErrMsg('呀，服务器出错了！')
+          }
+          throw new Error('HTTP status ' + err.response?.status);
+        }
         console.log(err.message);
         setStatus('error');
         errRef.current?.focus();
