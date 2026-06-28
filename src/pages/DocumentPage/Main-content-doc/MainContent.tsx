@@ -16,7 +16,7 @@ export function MainContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/documents')
+    fetch('https://moegirlwiki-backend.onrender.com/api/documents')
       .then(res => res.json())
       .then(data => {
         setdocs(data);

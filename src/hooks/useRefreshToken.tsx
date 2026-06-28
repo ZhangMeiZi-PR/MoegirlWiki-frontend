@@ -4,7 +4,7 @@ const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
 
   const refresh = () => {
-    return fetch('/api/refresh', {
+    return fetch('https://moegirlwiki-backend.onrender.com/api/refresh', {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

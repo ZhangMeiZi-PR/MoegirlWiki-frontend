@@ -62,7 +62,6 @@ export function MainContent() {
           } else {
             setErrMsg('呀，服务器出错了！')
           }
-          throw new Error('HTTP status ' + err.response?.status);
         }
         console.log(err.message);
         setStatus('error');
