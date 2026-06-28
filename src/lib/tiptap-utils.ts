@@ -359,7 +359,7 @@ export function selectionWithinConvertibleTypes(
  */
 export const handleImageUpload = async (
   file: File,
-  // onProgress?: (event: { progress: number }) => void,
+  onProgress?: (event: { progress: number }) => void,
   abortSignal?: AbortSignal
 ): Promise<string> => {
   // Validate file
